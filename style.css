@@ -1,310 +1,230 @@
-/*
+/* style.css
    RPG Hub Music Player
-   Finalized Stylesheet (style.css)
-   Connects index.html elements with visuals.
+   Complete stylesheet.
 */
 
 :root {
-  /* Core Palette */
   --gold: #d4b36a;
-  --gold-glow: rgba(212, 179, 106, 0.4);
   --gold-soft: #8d7340;
-  --accent: #72d4ff; /* Cosmic blue */
-  
-  /* UI Panels */
-  --panel-bg: rgba(10, 10, 18, 0.85); /* Darker for better contrast */
-  --panel-border: rgba(141, 115, 64, 0.35);
-  --text-main: #f4ead2;
-  --text-dark: #bba48c;
-
-  /* Sizing and Shape */
-  --radius: 12px;
-  --panel-padding: 18px;
+  --panel: rgba(10, 10, 18, 0.72);
+  --text: #f4ead2;
+  --accent: #72d4ff;
+  --radius: 18px;
 }
 
-/* Reset and Core Layout */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  scrollbar-width: thin;
-  scrollbar-color: var(--gold-soft) rgba(0,0,0,0);
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
   width: 100%;
   height: 100%;
-  background: #000; /* Deep space black */
-  font-family: Georgia, 'Times New Roman', serif;
-  color: var(--text-main);
-  overflow: hidden; /* Prevents site scrolling */
+  background: #000;
+  font-family: Georgia, serif;
+  color: var(--text);
 }
 
-/* 
-   Main Player Container
-   Gets background skins applied via JavaScript 
-*/
-#player {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
+body {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+  padding: 2%;
+}
+
+#player {
+  width: 100%;
+  max-width: 600px;
+  height: 90%;
+  min-height: 420px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  
-  transition: background-image 0.8s ease-in-out; /* Smooth skin fade */
+  box-shadow: 0 0 30px rgba(212, 179, 106, 0.35);
 }
 
-/* The dark panel over the cosmic skin */
-#panel {
-  width: 90%;
-  max-width: 480px; /* Limits max width on large screens */
-  min-height: 420px;
-  height: 90vh; /* Scaled height */
-  
-  background-color: var(--panel-bg);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius);
-  
+#overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.65));
+}
+
+#content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 40px var(--gold-glow);
-  
-  position: relative;
-  z-index: 2; /* Sits above background fade effects */
-  
-  backdrop-filter: blur(5px); /* Optional subtle blur */
+  justify-content: space-between;
+  padding: 20px;
 }
 
-/* 
-   Common styling for sections within the panel 
-*/
-.player-section {
-  width: 100%;
-  padding: 12px var(--panel-padding);
+.hidden { display: none; }
+
+/* Glass Panel UI & Layout */
+.glass-panel {
+  background: var(--panel);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--gold-soft);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 10px;
 }
 
-/* Utility classes */
-.hidden { display: none !important; }
-.flex-v { display: flex; flex-direction: column; }
-.flex-h { display: flex; flex-direction: row; align-items: center; justify-content: center; }
-
-/* 
-=========================================
-SECTION 1: HEADER (Song Title)
-=========================================
-*/
-#track-header {
-  border-bottom: 1px solid var(--panel-border);
+.header-section {
   text-align: center;
-  padding-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-#current-title {
-  font-size: 1.25rem;
-  font-weight: bold;
+.header-section h2 {
+  font-size: 1.2rem;
+  font-weight: normal;
   color: var(--gold);
-  text-shadow: 0 0 10px var(--gold-glow);
-  margin-bottom: 4px;
-}
-
-#current-artist {
-  font-size: 0.9rem;
-  color: var(--text-dark);
-  text-transform: uppercase;
   letter-spacing: 1px;
+  margin-bottom: 5px;
 }
 
-/* 
-=========================================
-SECTION 2: PROGRESS & TIMERS
-=========================================
-*/
-#progress-area {
-  padding-top: 15px;
-  padding-bottom: 10px;
+/* Playlist */
+.playlist-container {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 15px;
 }
 
-.timer-row {
+.playlist-item {
   display: flex;
   justify-content: space-between;
-  color: var(--text-dark);
-  font-size: 0.8rem;
-  font-family: monospace; /* Monospace for stable time digits */
-  margin-bottom: 6px;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid rgba(212, 179, 106, 0.2);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
 }
 
-/* 
-=========================================
-SECTION 3: PLAYBACK CONTROLS (Row 1)
-=========================================
-*/
-#control-buttons {
-  gap: 25px; /* Spacing between primary buttons */
-  padding-top: 15px;
-  padding-bottom: 15px;
+.playlist-item:last-child {
+  border-bottom: none;
 }
 
-/* Base button style (for all SVGs) */
-.btn {
+.playlist-item:hover {
+  background: rgba(212, 179, 106, 0.15);
+}
+
+.playlist-item.active {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+/* Controls Section */
+.controls-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.controls-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Icons (Buttons) */
+.control-btn {
   background: none;
   border: none;
   cursor: pointer;
-  transition: transform 0.1s ease, opacity 0.2s ease;
-  padding: 5px; /* Click target padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s, opacity 0.2s;
 }
 
-/* SVG icon color and sizing */
-.btn svg {
-  fill: var(--gold);
-  width: 28px;
-  height: 28px;
-  filter: drop-shadow(0 0 5px var(--gold-soft));
-}
-
-/* Hover effect */
-.btn:hover {
+.control-btn:hover {
   opacity: 0.8;
   transform: scale(1.05);
 }
 
-/* Click/Active effect */
-.btn:active {
+.control-btn:active {
   transform: scale(0.95);
-  opacity: 0.7;
 }
 
-/* Secondary Controls (Stop, Repeat) style (Smaller) */
-#sec-controls {
-  margin-left: 20px; /* Visual separation from skip buttons */
-  gap: 15px;
+.control-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--gold);
 }
 
-#sec-controls .btn svg {
-  width: 20px;
-  height: 20px;
-  opacity: 0.7; /* Subtler */
-}
-
-#sec-controls .btn:hover {
-  opacity: 1;
-}
-
-/* Toggled State for Repeat (Accent Color) */
-.btn.active svg {
-  fill: var(--accent);
-  filter: drop-shadow(0 0 8px var(--accent));
-}
-
-/* 
-=========================================
-SECTION 4: VOLUME CONTROL
-=========================================
-*/
-#volume-area {
-  gap: 10px;
-  padding-top: 5px;
-  padding-bottom: 15px;
-}
-
-#volume-area svg {
-  fill: var(--text-dark);
-  width: 18px;
-  height: 18px;
-}
-
-/* 
-=========================================
-SECTION 5: SKIN SELECTOR
-=========================================
-*/
-#skin-selector-area {
-  margin-top: auto; /* Pushes selector to the bottom of the panel */
-  border-top: 1px solid var(--panel-border);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px var(--panel-padding);
-}
-
-/* The actual dropdown menu styling */
-#skin-dropdown {
-  background-color: rgba(0,0,0,0.5); /* Slightly darker dropdown */
-  color: var(--text-main);
-  border: 1px solid var(--gold-soft);
-  border-radius: 4px;
-  padding: 4px 8px;
-  font-family: inherit;
-  font-size: 0.9rem;
-  cursor: pointer;
-  outline: none; /* Removes default glow on focus */
-}
-
-#skin-dropdown:hover, #skin-dropdown:focus {
-  border-color: var(--gold);
-  box-shadow: 0 0 10px var(--gold-glow);
-}
-
-#skin-dropdown option {
-  background-color: #111; /* Dropdown options background */
-}
-
-/* 
-=========================================
-SECTION 6: PLAYLIST (OPTIONAL)
-=========================================
-*/
-#playlist-area {
-  border-top: 1px solid var(--panel-border);
-  overflow-y: auto; /* Allows scrolling */
-  flex: 1; /* Fills remaining space */
-  padding-bottom: 10px;
-}
-
-.playlist-header {
-  font-size: 0.9rem;
-  color: var(--text-dark);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding-bottom: 8px;
-}
-
-#playlist-items {
-  list-style: none;
-}
-
-.track-row {
+/* Skin Selector */
+.skin-selector {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--text-main);
-  font-size: 0.95rem;
-  padding: 8px 10px;
+  font-size: 0.9rem;
+  color: var(--gold-soft);
+}
+
+.skin-selector select {
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--text);
+  border: 1px solid var(--gold-soft);
   border-radius: 4px;
+  padding: 3px 8px;
+  font-family: inherit;
+  outline: none;
   cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
-.track-row:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+.skin-selector select:hover {
+  border-color: var(--gold);
 }
 
-/* Currently playing track highight */
-.track-row.active {
-  color: var(--accent);
-  background-color: rgba(114, 212, 255, 0.1); /* Subtle accent bg */
-}
-
-.track-row .track-title {
-  font-family: Georgia, serif;
-}
-
-.track-row .track-duration {
-  font-family: monospace;
+/* Custom Sliders (Progress & Volume) */
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 0.8rem;
-  color: var(--text-dark);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: var(--accent);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  background: var(--accent);
 }
