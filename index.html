@@ -11,23 +11,21 @@ body {
   background: transparent;
   font-family: serif;
   color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
 /* CENTERED PLAYER CONTAINER */
 #playerContainer {
   width: 420px;
-  position: relative;
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 9999;
-  text-align: center;
 }
 
 /* EXPANDED PLAYER BOX */
 #playerBox {
-  display: block;
+  display: none;
   padding: 12px;
   border-radius: 10px;
   background-size: cover;
@@ -154,10 +152,13 @@ function toggleLoop() {
 /* COLLAPSE / EXPAND */
 function togglePlayer() {
   let box = document.getElementById("playerBox");
+  let container = document.getElementById("playerContainer");
   if (box.style.display === "none") {
     box.style.display = "block";
+    container.style.width = "420px";
   } else {
     box.style.display = "none";
+    container.style.width = "320px";
   }
 }
 
