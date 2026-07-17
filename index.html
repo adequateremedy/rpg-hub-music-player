@@ -5,33 +5,38 @@
 <title>RPG Hub Music Player</title>
 
 <style>
-body {
+html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow: hidden;
   background: transparent;
   font-family: serif;
   color: #fff;
 }
 
-/* COLLAPSED PLAYER */
+/* CENTERED PLAYER CONTAINER */
 #playerContainer {
-  width: 260px;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 420px;
 }
 
 /* EXPANDED PLAYER BOX */
 #playerBox {
-  display: none;
+  display: block;
   padding: 12px;
   border-radius: 10px;
+  background-color: rgba(0,0,0,0.6);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   backdrop-filter: blur(4px);
   border: 2px solid rgba(255,255,255,0.3);
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
 /* BUTTONS */
@@ -150,7 +155,7 @@ function toggleLoop() {
 /* COLLAPSE / EXPAND */
 function togglePlayer() {
   let box = document.getElementById("playerBox");
-  if (box.style.display === "none") {
+  if (box.style.display === "none" || box.style.display === "") {
     box.style.display = "block";
   } else {
     box.style.display = "none";
@@ -160,12 +165,17 @@ function togglePlayer() {
 /* THEME CHANGE */
 function changeTheme() {
   let theme = document.getElementById("themeSelector").value;
-  document.getElementById("playerBox").style.backgroundImage =
-    `url('backgrounds/${theme}')`;
+  let box = document.getElementById("playerBox");
+  box.style.backgroundImage = "url('backgrounds/" + theme + "')";
+  box.style.backgroundSize = "cover";
+  box.style.backgroundPosition = "center";
 }
 
 /* INITIAL LOAD */
 loadTrack(index);
+
+/* SET DEFAULT THEME */
+changeTheme();
 </script>
 
 </body>
