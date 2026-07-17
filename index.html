@@ -13,12 +13,13 @@ body {
   color: #fff;
 }
 
-/* COLLAPSED PLAYER */
+/* CENTERED PLAYER CONTAINER */
 #playerContainer {
-  width: 260px;
+  width: 420px;
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 9999;
 }
 
@@ -32,6 +33,7 @@ body {
   background-repeat: no-repeat;
   backdrop-filter: blur(4px);
   border: 2px solid rgba(255,255,255,0.3);
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
 /* BUTTONS */
@@ -83,11 +85,17 @@ button {
     <!-- THEME SELECTOR -->
     <div style="margin-top:10px;">
       <select id="themeSelector" onchange="changeTheme()" style="width:100%; padding:6px;">
-        <option value="cosmic1.jpg">Cosmic 1</option>
-        <option value="cosmic2.jpg">Cosmic 2</option>
-        <option value="cosmic3.jpg">Cosmic 3</option>
-        <option value="cosmic4.jpg">Cosmic 4</option>
-        <option value="cosmic5.jpg">Cosmic 5</option>
+        <option value="cosmic1.png">Cosmic 1</option>
+        <option value="cosmic2.png">Cosmic 2</option>
+        <option value="cosmic3.png">Cosmic 3</option>
+        <option value="cosmic4.png">Cosmic 4</option>
+        <option value="cosmic5.png">Cosmic 5</option>
+        <option value="cosmic6.png">Cosmic 6</option>
+        <option value="cosmic7.png">Cosmic 7</option>
+        <option value="cosmic8.png">Cosmic 8</option>
+        <option value="cosmic9.png">Cosmic 9</option>
+        <option value="cosmic10.png">Cosmic 10</option>
+        <option value="cosmic11.png">Cosmic 11</option>
       </select>
     </div>
 
@@ -144,10 +152,13 @@ function toggleLoop() {
 /* COLLAPSE / EXPAND */
 function togglePlayer() {
   let box = document.getElementById("playerBox");
+  let container = document.getElementById("playerContainer");
   if (box.style.display === "none") {
     box.style.display = "block";
+    container.style.width = "420px";
   } else {
     box.style.display = "none";
+    container.style.width = "320px";
   }
 }
 
