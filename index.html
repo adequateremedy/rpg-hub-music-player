@@ -1,1 +1,78 @@
-.
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RPG Hub Music Player</title>
+
+<style>
+body {
+  background: transparent;
+  margin: 0;
+  font-family: serif;
+  color: #fff;
+}
+#playerBox {
+  width: 100%;
+  padding: 10px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 8px;
+}
+button {
+  margin: 4px;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="playerBox">
+  <audio id="audioPlayer" controls style="width:100%;">
+    <source id="trackSource" src="" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div style="margin-top:10px;">
+    <button onclick="prevTrack()">⏮ Prev</button>
+    <button onclick="nextTrack()">⏭ Next</button>
+    <button onclick="toggleLoop()">🔁 Loop</button>
+  </div>
+</div>
+
+<script>
+let playlist = [
+  "https://www.dropbox.com/scl/fi/XXXX/Solus-Dynasty.mp3?dl=1",
+  "https://www.dropbox.com/scl/fi/YYYY/Song2.mp3?dl=1",
+  "https://www.dropbox.com/scl/fi/ZZZZ/Song3.mp3?dl=1"
+];
+
+let index = 0;
+let player = document.getElementById("audioPlayer");
+let source = document.getElementById("trackSource");
+
+function loadTrack(i) {
+  source.src = playlist[i];
+  player.load();
+  player.play();
+}
+
+function nextTrack() {
+  index = (index + 1) % playlist.length;
+  loadTrack(index);
+}
+
+function prevTrack() {
+  index = (index - 1 + playlist.length) % playlist.length;
+  loadTrack(index);
+}
+
+function toggleLoop() {
+  player.loop = !player.loop;
+}
+
+loadTrack(index);
+</script>
+
+</body>
+</html>
