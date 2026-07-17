@@ -81,7 +81,7 @@ body {
 
 .header-section h2 {
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight: normal;
   color: var(--gold);
   letter-spacing: 1px;
   margin-bottom: 5px;
