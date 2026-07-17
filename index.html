@@ -31,9 +31,7 @@ html, body {
   padding: 12px;
   border-radius: 10px;
 
-  /* THIS MUST BE EMPTY SO BACKGROUNDS CAN SHOW */
   background: none;
-
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -151,10 +149,12 @@ function togglePlayer() {
 function changeTheme() {
   let theme = document.getElementById("themeSelector").value;
   let box = document.getElementById("playerBox");
-  box.style.backgroundImage = "url('backgrounds/" + theme + "')";
+  box.style.backgroundImage =
+    "url('https://adequateremedy.github.io/rpg-hub-music-player/backgrounds/" + theme + "')";
 }
 
 loadTrack(index);
+document.getElementById("themeSelector").value = "cosmic1.png";
 changeTheme();
 </script>
 
