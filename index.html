@@ -6,56 +6,123 @@
 
 <style>
 body {
-  background: transparent;
   margin: 0;
+  padding: 0;
+  background: transparent;
   font-family: serif;
   color: #fff;
 }
-#playerBox {
-  width: 100%;
-  padding: 10px;
-  background: rgba(0,0,0,0.4);
-  border-radius: 8px;
+
+/* COLLAPSED PLAYER */
+#playerContainer {
+  width: 260px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
 }
+
+/* EXPANDED PLAYER BOX */
+#playerBox {
+  display: none;
+  padding: 12px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(4px);
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+/* BUTTONS */
 button {
   margin: 4px;
   padding: 6px 10px;
   font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+#toggleBtn {
+  width: 100%;
+  padding: 10px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border-radius: 10px;
+  font-size: 16px;
 }
 </style>
 </head>
 
 <body>
 
-<div id="playerBox">
-  <audio id="audioPlayer" controls autoplay style="width:100%;">
-    <source id="trackSource" src="" type="audio/mpeg">
-  </audio>
+<div id="playerContainer">
 
-  <div style="margin-top:10px;">
-    <button onclick="prevTrack()">⏮ Prev</button>
-    <button onclick="nextTrack()">⏭ Next</button>
-    <button onclick="toggleLoop()">🔁 Loop</button>
+  <!-- COLLAPSE / EXPAND BUTTON -->
+  <button id="toggleBtn" onclick="togglePlayer()">🎵 Music Player</button>
+
+  <!-- EXPANDED PLAYER -->
+  <div id="playerBox">
+
+    <!-- SONG TITLE -->
+    <div id="songTitle" style="margin-bottom:10px; font-size:16px; font-weight:bold;"></div>
+
+    <!-- AUDIO PLAYER -->
+    <audio id="audioPlayer" controls autoplay style="width:100%;">
+      <source id="trackSource" src="" type="audio/mpeg">
+    </audio>
+
+    <!-- CONTROLS -->
+    <div style="margin-top:10px;">
+      <button onclick="prevTrack()">⏮ Prev</button>
+      <button onclick="nextTrack()">⏭ Next</button>
+      <button onclick="toggleLoop()">🔁 Loop</button>
+    </div>
+
+    <!-- THEME SELECTOR -->
+    <div style="margin-top:10px;">
+      <select id="themeSelector" onchange="changeTheme()" style="width:100%; padding:6px;">
+        <option value="cosmic1.jpg">Cosmic 1</option>
+        <option value="cosmic2.jpg">Cosmic 2</option>
+        <option value="cosmic3.jpg">Cosmic 3</option>
+        <option value="cosmic4.jpg">Cosmic 4</option>
+        <option value="cosmic5.jpg">Cosmic 5</option>
+      </select>
+    </div>
+
   </div>
 </div>
 
 <script>
+/* SONG URLS */
 let playlist = [
   "https://github.com/adequateremedy/rpg-hub-music-player/raw/refs/heads/main/Hear%20the%20Call.mp3",
   "https://github.com/adequateremedy/rpg-hub-music-player/raw/refs/heads/main/Enter%20the%20Dynasty.mp3",
   "https://github.com/adequateremedy/rpg-hub-music-player/raw/refs/heads/main/Come%20Home.mp3"
 ];
 
+/* SONG TITLES */
+let titles = [
+  "Hear the Call",
+  "Enter the Dynasty",
+  "Come Home"
+];
+
+/* PLAYER ELEMENTS */
 let index = 0;
 let player = document.getElementById("audioPlayer");
 let source = document.getElementById("trackSource");
 
+/* LOAD TRACK */
 function loadTrack(i) {
   source.src = playlist[i];
+  document.getElementById("songTitle").innerText = titles[i];
   player.load();
   player.play();
 }
 
+/* NEXT / PREV */
 function nextTrack() {
   index = (index + 1) % playlist.length;
   loadTrack(index);
@@ -66,10 +133,32 @@ function prevTrack() {
   loadTrack(index);
 }
 
+/* AUTO-CONTINUE */
+player.addEventListener("ended", nextTrack);
+
+/* LOOP TOGGLE */
 function toggleLoop() {
   player.loop = !player.loop;
 }
 
+/* COLLAPSE / EXPAND */
+function togglePlayer() {
+  let box = document.getElementById("playerBox");
+  if (box.style.display === "none") {
+    box.style.display = "block";
+  } else {
+    box.style.display = "none";
+  }
+}
+
+/* THEME CHANGE */
+function changeTheme() {
+  let theme = document.getElementById("themeSelector").value;
+  document.getElementById("playerBox").style.backgroundImage =
+    `url('backgrounds/${theme}')`;
+}
+
+/* INITIAL LOAD */
 loadTrack(index);
 </script>
 
