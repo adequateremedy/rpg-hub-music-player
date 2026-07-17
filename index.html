@@ -9,7 +9,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; /* removes scroll bar */
+  overflow: hidden;
   background: transparent;
   font-family: serif;
   color: #fff;
@@ -30,6 +30,7 @@ html, body {
   display: block;
   padding: 12px;
   border-radius: 10px;
+  background-color: rgba(0,0,0,0.6);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -164,12 +165,17 @@ function togglePlayer() {
 /* THEME CHANGE */
 function changeTheme() {
   let theme = document.getElementById("themeSelector").value;
-  document.getElementById("playerBox").style.backgroundImage =
-    `url('backgrounds/${theme}')`;
+  let box = document.getElementById("playerBox");
+  box.style.backgroundImage = "url('backgrounds/" + theme + "')";
+  box.style.backgroundSize = "cover";
+  box.style.backgroundPosition = "center";
 }
 
 /* INITIAL LOAD */
 loadTrack(index);
+
+/* SET DEFAULT THEME */
+changeTheme();
 </script>
 
 </body>
