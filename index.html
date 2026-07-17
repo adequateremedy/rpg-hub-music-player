@@ -5,24 +5,23 @@
 <title>RPG Hub Music Player</title>
 
 <style>
-html, body {
+body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  overflow: hidden;
   background: transparent;
   font-family: serif;
   color: #fff;
 }
 
-/* CENTERED PLAYER CONTAINER */
+/* CENTERED, FIXED PLAYER CONTAINER */
 #playerContainer {
-  position: absolute;
-  top: 50%;
+  position: fixed;
+  bottom: 20px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
+  width: 360px;
   text-align: center;
-  width: 420px;
+  z-index: 9999;
 }
 
 /* EXPANDED PLAYER BOX */
@@ -149,8 +148,7 @@ function togglePlayer() {
 function changeTheme() {
   let theme = document.getElementById("themeSelector").value;
   let box = document.getElementById("playerBox");
-  box.style.backgroundImage =
-    "url('https://adequateremedy.github.io/rpg-hub-music-player/backgrounds/" + theme + "')";
+  box.style.backgroundImage = "url('backgrounds/" + theme + "')";
 }
 
 loadTrack(index);
