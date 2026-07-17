@@ -4,16 +4,16 @@
 */
 
 const playlist = [
-    { title: "Enter the Dynasty", src: "./music/Enter the Dynasty.mp3" },
-    { title: "Hear the Call", src: "./music/Hear the Call.mp3" },
-    { title: "Come Home", src: "./music/Come Home.mp3" }
+    { title: "Enter the Dynasty", src: "music/Enter the Dynasty.mp3" },
+    { title: "Hear the Call", src: "music/Hear the Call.mp3" },
+    { title: "Come Home", src: "music/Come Home.mp3" }
 ];
 
 const skins = [
-    "./backgrounds/cosmic1.jpg", "./backgrounds/cosmic2.jpg", "./backgrounds/cosmic3.jpg",
-    "./backgrounds/cosmic4.jpg", "./backgrounds/cosmic5.jpg", "./backgrounds/cosmic6.jpg",
-    "./backgrounds/cosmic7.jpg", "./backgrounds/cosmic8.jpg", "./backgrounds/cosmic9.jpg",
-    "./backgrounds/cosmic10.jpg", "./backgrounds/cosmic11.jpg"
+    "skins/cosmic1.jpg", "skins/cosmic2.jpg", "skins/cosmic3.jpg",
+    "skins/cosmic4.jpg", "skins/cosmic5.jpg", "skins/cosmic6.jpg",
+    "skins/cosmic7.jpg", "skins/cosmic8.jpg", "skins/cosmic9.jpg",
+    "skins/cosmic10.jpg", "skins/cosmic11.jpg"
 ];
 
 // Audio Object
@@ -196,6 +196,8 @@ function toggleRepeat() {
 
 // Update Play/Pause Button SVG (Basic text fallback if SVG isn't used)
 function updatePlayPauseUI() {
+    // Assuming you have an SVG inside the button, you can swap it here. 
+    // For now, this handles state logic.
     if (isPlaying) {
         playPauseBtn.setAttribute('data-state', 'playing');
     } else {
