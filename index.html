@@ -11,23 +11,18 @@ body {
   background: transparent;
   font-family: serif;
   color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
 /* CENTERED PLAYER CONTAINER */
 #playerContainer {
-  width: 420px;
-  position: relative;
-  z-index: 9999;
+  width: 100%;
+  padding: 20px 0;
   text-align: center;
 }
 
 /* EXPANDED PLAYER BOX */
 #playerBox {
-  display: block;
+  display: none;
   padding: 12px;
   border-radius: 10px;
   background-size: cover;
@@ -36,6 +31,8 @@ body {
   backdrop-filter: blur(4px);
   border: 2px solid rgba(255,255,255,0.3);
   box-shadow: 0 0 20px rgba(255,255,255,0.3);
+  display: inline-block;
+  max-width: 420px;
 }
 
 /* BUTTONS */
@@ -49,7 +46,7 @@ button {
 }
 
 #toggleBtn {
-  width: 100%;
+  width: 260px;
   padding: 10px;
   background: rgba(0,0,0,0.6);
   color: #fff;
@@ -154,8 +151,8 @@ function toggleLoop() {
 /* COLLAPSE / EXPAND */
 function togglePlayer() {
   let box = document.getElementById("playerBox");
-  if (box.style.display === "none") {
-    box.style.display = "block";
+  if (box.style.display === "none" || box.style.display === "") {
+    box.style.display = "inline-block";
   } else {
     box.style.display = "none";
   }
