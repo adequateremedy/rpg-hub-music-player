@@ -5,9 +5,11 @@
 <title>RPG Hub Music Player</title>
 
 <style>
-body {
+html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow: hidden; /* removes scroll bar */
   background: transparent;
   font-family: serif;
   color: #fff;
@@ -15,14 +17,17 @@ body {
 
 /* CENTERED PLAYER CONTAINER */
 #playerContainer {
-  width: 100%;
-  padding: 20px 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
+  width: 420px;
 }
 
 /* EXPANDED PLAYER BOX */
 #playerBox {
-  display: none;
+  display: block;
   padding: 12px;
   border-radius: 10px;
   background-size: cover;
@@ -31,8 +36,6 @@ body {
   backdrop-filter: blur(4px);
   border: 2px solid rgba(255,255,255,0.3);
   box-shadow: 0 0 20px rgba(255,255,255,0.3);
-  display: inline-block;
-  max-width: 420px;
 }
 
 /* BUTTONS */
@@ -46,7 +49,7 @@ button {
 }
 
 #toggleBtn {
-  width: 260px;
+  width: 100%;
   padding: 10px;
   background: rgba(0,0,0,0.6);
   color: #fff;
@@ -152,7 +155,7 @@ function toggleLoop() {
 function togglePlayer() {
   let box = document.getElementById("playerBox");
   if (box.style.display === "none" || box.style.display === "") {
-    box.style.display = "inline-block";
+    box.style.display = "block";
   } else {
     box.style.display = "none";
   }
