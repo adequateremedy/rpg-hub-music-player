@@ -1,6 +1,8 @@
 [
   { "title": "After the Final Siren", "src": "./music/After the Final Siren.mp3" }
 ,
+  { "title": "Age of Steam", "src": "./music/Age of Steam.mp3" }
+,
   { "title": "Before Iron Found the Forest", "src": "./music/Before Iron Found the Forest.mp3" }
 ,
   { "title": "Beneath Fallen Oak", "src": "./music/Beneath Fallen Oak.mp3" }
@@ -16,6 +18,8 @@
   { "title": "Follow Fireflies", "src": "./music/Follow Fireflies.mp3" }
 ,
   { "title": "Hear the Call", "src": "./music/Hear the Call.mp3" }
+,
+  { "title": "Merciless Engines", "src": "./music/Merciless Engines.mp3" }
 ,
   { "title": "Prakriti in the Air", "src": "./music/Prakriti in the Air.mp3" }
 ,
