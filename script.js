@@ -3,11 +3,7 @@
    Complete logic and functionality.
 */
 
-const playlist = [
-    { title: "Enter the Dynasty", src: "./music/Enter the Dynasty.mp3" },
-    { title: "Hear the Call", src: "./music/Hear the Call.mp3" },
-    { title: "Come Home", src: "./music/Come Home.mp3" }
-];
+let playlist = [];
 
 const skins = [
     "./backgrounds/cosmic1.jpg", "./backgrounds/cosmic2.jpg", "./backgrounds/cosmic3.jpg",
@@ -37,7 +33,15 @@ const currentTimeDisplay = document.getElementById('current-time');
 const durationDisplay = document.getElementById('duration');
 
 // Initialize Player
-function initPlayer() {
+async function initPlayer() {
+    try {
+        const response = await fetch('./playlist.json', { cache: 'no-store' });
+        playlist = await response.json();
+    } catch (error) {
+        console.error("Error loading the playlist JSON file.");
+        return;
+    }
+
     buildPlaylist();
     buildSkinSelector();
     loadPreferences();
@@ -102,11 +106,15 @@ function loadPreferences() {
     const savedTrack = localStorage.getItem('rpg_music_track');
     if (savedTrack !== null && savedTrack < playlist.length) {
         currentTrackIndex = parseInt(savedTrack, 10);
+    } else {
+        currentTrackIndex = 0;
     }
 }
 
 // Load and Play Track
 function loadTrack(index, playImmediately) {
+    if (playlist.length === 0) return;
+    
     audio.src = playlist[index].src;
     updatePlaylistHighlight(index);
     localStorage.setItem('rpg_music_track', index);
