@@ -17,6 +17,8 @@
 ,
   { "title": "Hear the Call", "src": "./music/Hear the Call.mp3" }
 ,
+  { "title": "Prakriti in the Air", "src": "./music/Prakriti in the Air.mp3" }
+,
   { "title": "Sometimes", "src": "./music/Sometimes.mp3" }
 ,
   { "title": "The Ancient Blood", "src": "./music/The Ancient Blood.mp3" }
@@ -30,6 +32,8 @@
   { "title": "The Living Current", "src": "./music/The Living Current.mp3" }
 ,
   { "title": "The Long Road North", "src": "./music/The Long Road North.mp3" }
+,
+  { "title": "Through Clover and Rain", "src": "./music/Through Clover and Rain.mp3" }
 ,
   { "title": "Where the Forest Calls", "src": "./music/Where the Forest Calls.mp3" }
 ]
