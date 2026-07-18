@@ -5,6 +5,8 @@
 ,
   { "title": "Beneath Fallen Oak", "src": "./music/Beneath Fallen Oak.mp3" }
 ,
+  { "title": "Between Moss and Moonlight", "src": "./music/Between Moss and Moonlight.mp3" }
+,
   { "title": "Come Home", "src": "./music/Come Home.mp3" }
 ,
   { "title": "Enter the Dynasty", "src": "./music/Enter the Dynasty.mp3" }
@@ -24,6 +26,8 @@
   { "title": "The Forgotten Names", "src": "./music/The Forgotten Names.mp3" }
 ,
   { "title": "The Last Green Horizon", "src": "./music/The Last Green Horizon.mp3" }
+,
+  { "title": "The Living Current", "src": "./music/The Living Current.mp3" }
 ,
   { "title": "The Long Road North", "src": "./music/The Long Road North.mp3" }
 ,
