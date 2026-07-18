@@ -1,9 +1,13 @@
 [
+  { "title": "After the Final Siren", "src": "./music/After the Final Siren.mp3" }
+,
   { "title": "Come Home", "src": "./music/Come Home.mp3" }
 ,
   { "title": "Enter the Dynasty", "src": "./music/Enter the Dynasty.mp3" }
 ,
   { "title": "Hear the Call", "src": "./music/Hear the Call.mp3" }
+,
+  { "title": "The Forgotten Names", "src": "./music/The Forgotten Names.mp3" }
 ,
   { "title": "The Hunters Were Only Stories", "src": "./music/The Hunters Were Only Stories.mp3" }
 ,
