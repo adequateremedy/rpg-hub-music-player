@@ -1,0 +1,39 @@
+name: Update Playlist
+
+on:
+  push:
+    paths:
+      - 'music/**'
+
+jobs:
+  build-playlist:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate JSON
+        run: |
+          echo "[" > playlist.json
+          first=true
+          for file in music/*.mp3; do
+            if [ -e "$file" ]; then
+              filename=$(basename "$file" .mp3)
+              if [ "$first" = true ]; then
+                first=false
+              else
+                echo "," >> playlist.json
+              fi
+              echo "  { \"title\": \"$filename\", \"src\": \"./$file\" }" >> playlist.json
+            fi
+          done
+          echo "]" >> playlist.json
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add playlist.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update playlist.json from new mp3" && git push)
